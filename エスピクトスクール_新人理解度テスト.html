@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エスピクトスクール 新人理解度テスト</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .test {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            padding: 20px;
+            border-left: 5px solid #17a2b8;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h2 {
+            color: #17a2b8;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .question h3 {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            margin: 15px 0;
+        }
+
+        .option {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .answer {
+            background: #fff3cd;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .answer.show {
+            display: block;
+        }
+
+        .answer h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .answer .correct-answer {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .answer .model-answer {
+            color: #333;
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 3px;
+        }
+
+        .text-answer {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+        }
+
+        .text-answer:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .submit-btn {
+            background: #667eea;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .result {
+            display: none;
+            background: #d4edda;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result.pass {
+            background: #d4edda;
+            border: 3px solid #28a745;
+        }
+
+        .result.fail {
+            background: #f8d7da;
+            border: 3px solid #dc3545;
+        }
+
+        .result h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .result.pass h2 {
+            color: #28a745;
+        }
+
+        .result.fail h2 {
+            color: #dc3545;
+        }
+
+        .score {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .badge-success {
+            background: #28a745;
+        }
+
+        .badge-danger {
+            background: #dc3545;
+        }
+
+        @media print {
+            .submit-section, .result {
+                display: none;
+            }
+            .answer {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="test">
+            <div class="header">
+                <h1>エスピクトスクール</h1>
+                <p>新人・営業用 理解度テスト</p>
+            </div>
+
+            <div class="info-box">
+                <h2>📋 テスト形式</h2>
+                <ul>
+                    <li><strong>全15問</strong></li>
+                    <li><strong>合格：12問以上（80%）</strong></li>
+                    <li><strong>不合格：再研修＋ロープレ</strong></li>
+                </ul>
+            </div>
+
+            <form id="testForm">
+                <!-- Q1 -->
+                <div class="question">
+                    <span class="question-number">Q1</span>
+                    <h3>エスピクトの価格を一言で言うと？</h3>
+                    <textarea class="text-answer" name="q1" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「授業費ではなく、<strong>事業所運営コストの置き換え</strong>」</p>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="question">
+                    <span class="question-number">Q2</span>
+                    <h3>「回収できます」と言っていい？</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="A"> A. 言っていい
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="B"> B. 言わない
+                        </label>
+                    </div>
+                    <div class="answer">
+                        <h4>✅ 正解</h4>
+                        <p class="correct-answer">B. 言わない</p>
+                        <p class="model-answer">「回収できます」はNGワード。工賃で回収するのではなく、利用者増・定着で給付費が増えるケースが多い。</p>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="question">
+                    <span class="question-number">Q3</span>
+                    <h3>正しい回収説明はどれ？</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="A"> A. 工賃で回収
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="B"> B. 案件量で回収
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="C"> C. 利用者増・定着で給付費が増える
+                        </label>
+                    </div>
+                    <div class="answer">
+                        <h4>✅ 正解</h4>
+                        <p class="correct-answer">C. 利用者増・定着で給付費が増える</p>
+                        <p class="model-answer">提供価値が増えて利用者が増え、給付費が増えるケースが多い。IT・在宅・実案件が「選ばれる理由」になる。</p>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="question">
+                    <span class="question-number">Q4</span>
+                    <h3>価格反論は何に変換する？</h3>
+                    <textarea class="text-answer" name="q4" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>値下げ交渉 → 設計の話</strong>」</p>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="question">
+                    <span class="question-number">Q5</span>
+                    <h3>30万プランの役割は？</h3>
+                    <textarea class="text-answer" name="q5" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「実案件を受けても事故らない<strong>型づくり</strong>」</p>
+                    </div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="question">
+                    <span class="question-number">Q6</span>
+                    <h3>50万プランを勧める基準は？</h3>
+                    <textarea class="text-answer" name="q6" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>毎月安定して実案件を回したい</strong>時」</p>
+                    </div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="question">
+                    <span class="question-number">Q7</span>
+                    <h3>100万プランを無理に勧めていい？</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q7" value="A"> A. はい
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="B"> B. いいえ
+                        </label>
+                    </div>
+                    <div class="answer">
+                        <h4>✅ 正解</h4>
+                        <p class="correct-answer">B. いいえ</p>
+                        <p class="model-answer">無理に勧めてはいけない。大規模事業所・複数チーム運用・拠点化を目指す事業所に適している。</p>
+                    </div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="question">
+                    <span class="question-number">Q8</span>
+                    <h3>「外注でしょ？」と言われた時の正解は？</h3>
+                    <textarea class="text-answer" name="q8" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「丸投げではなく、<strong>教育前提で指示書・品質管理まで含めて提供</strong>」</p>
+                    </div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="question">
+                    <span class="question-number">Q9</span>
+                    <h3>価格が高いと言われたら最初に何をする？</h3>
+                    <textarea class="text-answer" name="q9" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>どのタイプの"高い"か質問で特定</strong>する」<br>
+                        （①固定費として重い ②価値が見えない ③他社比較）</p>
+                    </div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="question">
+                    <span class="question-number">Q10</span>
+                    <h3>他社研修と比較された時の正解は？</h3>
+                    <textarea class="text-answer" name="q10" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「比較対象は研修ではなく、<strong>講師採用＋実案件運用＋品質管理</strong>」</p>
+                    </div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="question">
+                    <span class="question-number">Q11</span>
+                    <h3>値下げ要求が来た時の最初の一言は？</h3>
+                    <textarea class="text-answer" name="q11" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「値下げより<strong>設計を合わせる</strong>のが正解」</p>
+                    </div>
+                </div>
+
+                <!-- Q12 -->
+                <div class="question">
+                    <span class="question-number">Q12</span>
+                    <h3>NGワードを2つ書け</h3>
+                    <textarea class="text-answer" name="q12" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答例</h4>
+                        <p class="model-answer">「工賃で回収」「指導員がタダ」<br>
+                        （他にも「外注丸投げ」「これで儲かる」など）</p>
+                    </div>
+                </div>
+
+                <!-- Q13 -->
+                <div class="question">
+                    <span class="question-number">Q13</span>
+                    <h3>利用者が増える理由を一言で</h3>
+                    <textarea class="text-answer" name="q13" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>選ばれる理由が増える</strong>から」<br>
+                        （IT×在宅×実案件という明確な売り）</p>
+                    </div>
+                </div>
+
+                <!-- Q14 -->
+                <div class="question">
+                    <span class="question-number">Q14</span>
+                    <h3>最後に必ず提案するものは？</h3>
+                    <textarea class="text-answer" name="q14" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>無料効果試算</strong>」</p>
+                    </div>
+                </div>
+
+                <!-- Q15 -->
+                <div class="question">
+                    <span class="question-number">Q15</span>
+                    <h3>このサービスの思想を一言で</h3>
+                    <textarea class="text-answer" name="q15" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>選ばれるより、選ぶサービス</strong>」</p>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="button" class="submit-btn" onclick="showAnswers()">解答を表示</button>
+                    <button type="button" class="submit-btn" onclick="calculateScore()" style="background: #28a745; margin-left: 10px;">採点する</button>
+                </div>
+
+                <div id="result" class="result">
+                    <h2 id="resultTitle"></h2>
+                    <div class="score" id="score"></div>
+                    <div id="resultMessage"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q2: 'B',
+            q3: 'C',
+            q7: 'B'
+        };
+
+        const modelAnswers = {
+            q1: '授業費ではなく、事業所運営コストの置き換え',
+            q4: '値下げ交渉 → 設計の話',
+            q5: '実案件を受けても事故らない型づくり',
+            q6: '毎月安定して実案件を回したい',
+            q8: '丸投げではなく、教育前提で指示書・品質管理まで含めて提供',
+            q9: 'どのタイプの"高い"か質問で特定',
+            q10: '比較対象は研修ではなく、講師採用＋実案件運用＋品質管理',
+            q11: '値下げより設計を合わせる',
+            q12: '工賃で回収、指導員がタダ',
+            q13: '選ばれる理由が増える',
+            q14: '無料効果試算',
+            q15: '選ばれるより、選ぶサービス'
+        };
+
+        function showAnswers() {
+            const answers = document.querySelectorAll('.answer');
+            answers.forEach(answer => {
+                answer.classList.add('show');
+            });
+        }
+
+        function calculateScore() {
+            let score = 0;
+            let total = 15;
+
+            // 選択式問題の採点
+            Object.keys(correctAnswers).forEach(q => {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === correctAnswers[q]) {
+                    score++;
+                }
+            });
+
+            // 記述式問題の採点（簡易版：キーワードチェック）
+            const textQuestions = ['q1', 'q4', 'q5', 'q6', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14', 'q15'];
+            textQuestions.forEach(q => {
+                const answer = document.querySelector(`textarea[name="${q}"]`).value.toLowerCase();
+                const model = modelAnswers[q].toLowerCase();
+                
+                // キーワードが含まれているかチェック
+                const keywords = model.split(/[、，・]/).map(k => k.trim()).filter(k => k.length > 2);
+                const hasKeyword = keywords.some(keyword => answer.includes(keyword));
+                
+                if (hasKeyword || answer.length > 10) {
+                    score++;
+                }
+            });
+
+            // 結果表示
+            const resultDiv = document.getElementById('result');
+            const resultTitle = document.getElementById('resultTitle');
+            const scoreDiv = document.getElementById('score');
+            const resultMessage = document.getElementById('resultMessage');
+
+            resultDiv.classList.add('show');
+            scoreDiv.textContent = `得点: ${score} / ${total} 問`;
+
+            if (score >= 12) {
+                resultDiv.classList.add('pass');
+                resultDiv.classList.remove('fail');
+                resultTitle.textContent = '✅ 合格！';
+                resultMessage.innerHTML = `
+                    <p style="font-size: 1.2em; margin: 20px 0;">おめでとうございます！</p>
+                    <p><span class="badge badge-success">商談同席OK</span></p>
+                    <p style="margin-top: 20px;">理解度が十分です。実際の商談に同席して経験を積んでください。</p>
+                `;
+            } else {
+                resultDiv.classList.add('fail');
+                resultDiv.classList.remove('pass');
+                resultTitle.textContent = '❌ 不合格';
+                resultMessage.innerHTML = `
+                    <p style="font-size: 1.2em; margin: 20px 0;">再研修が必要です</p>
+                    <p><span class="badge badge-danger">再研修＋ロープレ3本</span></p>
+                    <p style="margin-top: 20px;">解答を確認して、再度学習してください。<br>
+                    合格ライン（12問以上）に達するまで再テストを受けてください。</p>
+                `;
+            }
+
+            // 解答を表示
+            showAnswers();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エスピクトスクール 統合資料</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* タブナビゲーション */
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 20px;
+            background: #e9ecef;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            min-width: 200px;
+        }
+
+        .tab-button:hover {
+            background: #dee2e6;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        /* タブコンテンツ */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 共通スタイル */
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .section h4 {
+            color: #555;
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .quote strong {
+            color: #667eea;
+        }
+
+        .warning {
+            background: #f8d7da;
+            padding: 15px;
+            border-left: 4px solid #dc3545;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .success {
+            background: #d4edda;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .info {
+            background: #d1ecf1;
+            padding: 15px;
+            border-left: 4px solid #17a2b8;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 5px solid #ffc107;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #667eea;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        .badge-danger {
+            background: #dc3545;
+        }
+
+        .badge-success {
+            background: #28a745;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid #e9ecef;
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .key-point {
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9fa;
+        }
+
+        /* テスト用スタイル */
+        .info-box {
+            background: #d1ecf1;
+            padding: 20px;
+            border-left: 5px solid #17a2b8;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h2 {
+            color: #17a2b8;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .question h3 {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            margin: 15px 0;
+        }
+
+        .option {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .text-answer {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+        }
+
+        .text-answer:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .answer {
+            background: #fff3cd;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .answer.show {
+            display: block;
+        }
+
+        .answer h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .answer .correct-answer {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .answer .model-answer {
+            color: #333;
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 3px;
+        }
+
+        .submit-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .submit-btn {
+            background: #667eea;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 5px;
+        }
+
+        .submit-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .result {
+            display: none;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result.pass {
+            background: #d4edda;
+            border: 3px solid #28a745;
+        }
+
+        .result.fail {
+            background: #f8d7da;
+            border: 3px solid #dc3545;
+        }
+
+        .result h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .result.pass h2 {
+            color: #28a745;
+        }
+
+        .result.fail h2 {
+            color: #dc3545;
+        }
+
+        .score {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        @media print {
+            .tabs {
+                display: none;
+            }
+            .tab-content {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>エスピクトスクール</h1>
+            <p>統合資料</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">営業チートシート・新人理解度テスト・教育用資料</p>
+        </header>
+
+        <!-- タブナビゲーション -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('cheatsheet')">📋 営業チートシート</button>
+            <button class="tab-button" onclick="switchTab('test')">📝 新人理解度テスト</button>
+            <button class="tab-button" onclick="switchTab('training')">📚 教育用資料</button>
+        </div>
+
+        <!-- 営業チートシート -->
+        <div id="cheatsheet" class="tab-content active">
+            <div class="section">
+                <h2>🎯 目的</h2>
+                <ul>
+                    <li>✅ 値下げせずに価格を通す</li>
+                    <li>✅ 「回収できます」を使わずに納得させる</li>
+                    <li>✅ 30／50／100万に安全着地させる</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>■ 最初の一言（暗記必須）</h2>
+                <div class="quote">
+                    これは授業費ではなく、<br>
+                    <strong>教育＋実案件（制作業務）＋指示書＋品質管理＋運用支援＋AI記録</strong>まで含めた<br>
+                    <strong>事業所運営コストの置き換え</strong>です。
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ 価格反論の分岐（30秒で判定）</h2>
+                <div class="info">
+                    <h3>質問：</h3>
+                    <p class="key-point">高いと感じるのは<br>
+                    ①固定費として重い<br>
+                    ②価値が見えない<br>
+                    ③他社比較<br>
+                    どれに近いですか？</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ タイプ別・即返答</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h4>① 固定費が重い</h4>
+                        <p class="quote">
+                            <strong>30万でまず回るか確認</strong>が安全です。<br>
+                            回ったら50万に上げる方が成功率高いです。
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h4>② 価値が見えない</h4>
+                        <p class="quote">
+                            高いかどうかは、<br>
+                            <strong>教材／人材／実案件運用／品質管理／記録</strong><br>
+                            どこが一番しんどいかで決まります。
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h4>③ 他社比較</h4>
+                        <p class="quote">
+                            教育単体と比べると高いです。<br>
+                            比較対象は<br>
+                            <strong>講師採用＋教材＋実案件運用＋品質管理＋記録効率化</strong>です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ 「回収できる？」の正解</h2>
+                <div class="success">
+                    <p>回収は工賃ではなく、<br>
+                    <strong>提供価値が増えて利用者が増え、給付費が増える</strong>ケースが多いです。<br>
+                    IT・在宅・実案件が「選ばれる理由」になります。</p>
+                </div>
+                <div class="info">
+                    <h3>安全な事例表現</h3>
+                    <p class="quote">見学が増えて利用者数が増えた事業所は複数あります。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ プランの意味（これだけ覚える）</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h4><span class="badge">30万</span></h4>
+                        <p class="key-point">型づくり<br>（事故らない導入）</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="badge">50万</span></h4>
+                        <p class="key-point">安定運用<br>（毎月回す）</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="badge">100万</span></h4>
+                        <p class="key-point">拠点化<br>（複数ライン）</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ 値下げ要求の守り</h2>
+                <div class="warning">
+                    <p class="quote">
+                        値下げより<strong>設計合わせ</strong>が正解です。<br>
+                        下げるなら、実案件量／伴走頻度／初期支援のどれかを削ります。
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ NGワード</h2>
+                <div class="warning">
+                    <ul>
+                        <li>❌ 工賃で回収</li>
+                        <li>❌ 外注丸投げ</li>
+                        <li>❌ 指導員がタダ</li>
+                        <li>❌ これで儲かる</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ 最後の着地点</h2>
+                <div class="success">
+                    <p class="key-point"><strong>無料効果試算</strong>で数字を見て判断しましょう。</p>
+                </div>
+            </div>
+
+            <div class="section" style="background: #fff3cd; border-left-color: #ffc107;">
+                <h2>💡 使い方</h2>
+                <ul>
+                    <li>商談前に必ず目を通す</li>
+                    <li>価格反論が出たら「30秒判定」を実行</li>
+                    <li>NGワードは絶対に使わない</li>
+                    <li>最後は必ず「無料効果試算」を提案</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 新人理解度テスト -->
+        <div id="test" class="tab-content">
+            <div class="info-box">
+                <h2>📋 テスト形式</h2>
+                <ul>
+                    <li><strong>全15問</strong></li>
+                    <li><strong>合格：12問以上（80%）</strong></li>
+                    <li><strong>不合格：再研修＋ロープレ</strong></li>
+                </ul>
+            </div>
+
+            <form id="testForm">
+                <div class="question">
+                    <span class="question-number">Q1</span>
+                    <h3>エスピクトの価格を一言で言うと？</h3>
+                    <textarea class="text-answer" name="q1" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「授業費ではなく、<strong>事業所運営コストの置き換え</strong>」</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q2</span>
+                    <h3>「回収できます」と言っていい？</h3>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q2" value="A"> A. 言っていい</label>
+                        <label class="option"><input type="radio" name="q2" value="B"> B. 言わない</label>
+                    </div>
+                    <div class="answer">
+                        <h4>✅ 正解</h4>
+                        <p class="correct-answer">B. 言わない</p>
+                        <p class="model-answer">「回収できます」はNGワード。工賃で回収するのではなく、利用者増・定着で給付費が増えるケースが多い。</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q3</span>
+                    <h3>正しい回収説明はどれ？</h3>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q3" value="A"> A. 工賃で回収</label>
+                        <label class="option"><input type="radio" name="q3" value="B"> B. 案件量で回収</label>
+                        <label class="option"><input type="radio" name="q3" value="C"> C. 利用者増・定着で給付費が増える</label>
+                    </div>
+                    <div class="answer">
+                        <h4>✅ 正解</h4>
+                        <p class="correct-answer">C. 利用者増・定着で給付費が増える</p>
+                        <p class="model-answer">提供価値が増えて利用者が増え、給付費が増えるケースが多い。IT・在宅・実案件が「選ばれる理由」になる。</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q4</span>
+                    <h3>価格反論は何に変換する？</h3>
+                    <textarea class="text-answer" name="q4" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>値下げ交渉 → 設計の話</strong>」</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q5</span>
+                    <h3>30万プランの役割は？</h3>
+                    <textarea class="text-answer" name="q5" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「実案件を受けても事故らない<strong>型づくり</strong>」</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q6</span>
+                    <h3>50万プランを勧める基準は？</h3>
+                    <textarea class="text-answer" name="q6" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>毎月安定して実案件を回したい</strong>時」</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q7</span>
+                    <h3>100万プランを無理に勧めていい？</h3>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q7" value="A"> A. はい</label>
+                        <label class="option"><input type="radio" name="q7" value="B"> B. いいえ</label>
+                    </div>
+                    <div class="answer">
+                        <h4>✅ 正解</h4>
+                        <p class="correct-answer">B. いいえ</p>
+                        <p class="model-answer">無理に勧めてはいけない。大規模事業所・複数チーム運用・拠点化を目指す事業所に適している。</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q8</span>
+                    <h3>「外注でしょ？」と言われた時の正解は？</h3>
+                    <textarea class="text-answer" name="q8" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「丸投げではなく、<strong>IT教育と実際の案件を提供し、利用者さんが実践的にスキルを身につけられるサービス</strong>」</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q9</span>
+                    <h3>価格が高いと言われたら最初に何をする？</h3>
+                    <textarea class="text-answer" name="q9" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>どのタイプの"高い"か質問で特定</strong>する」<br>（①固定費として重い ②価値が見えない ③他社比較）</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q10</span>
+                    <h3>他社研修と比較された時の正解は？</h3>
+                    <textarea class="text-answer" name="q10" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「比較対象は研修ではなく、<strong>講師採用＋実案件運用＋品質管理</strong>」</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q11</span>
+                    <h3>値下げ要求が来た時の最初の一言は？</h3>
+                    <textarea class="text-answer" name="q11" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「値下げより<strong>設計を合わせる</strong>のが正解」</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q12</span>
+                    <h3>NGワードを2つ書け</h3>
+                    <textarea class="text-answer" name="q12" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答例</h4>
+                        <p class="model-answer">「工賃で回収」「指導員がタダ」<br>（他にも「外注丸投げ」「これで儲かる」など）</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q13</span>
+                    <h3>利用者が増える理由を一言で</h3>
+                    <textarea class="text-answer" name="q13" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>選ばれる理由が増える</strong>から」<br>（IT×在宅×実案件という明確な売り）</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q14</span>
+                    <h3>最後に必ず提案するものは？</h3>
+                    <textarea class="text-answer" name="q14" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>無料効果試算</strong>」</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <span class="question-number">Q15</span>
+                    <h3>このサービスの思想を一言で</h3>
+                    <textarea class="text-answer" name="q15" placeholder="解答を入力してください"></textarea>
+                    <div class="answer">
+                        <h4>✅ 模範解答</h4>
+                        <p class="model-answer">「<strong>選ばれるより、選ぶサービス</strong>」</p>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="button" class="submit-btn" onclick="showAnswers()">解答を表示</button>
+                    <button type="button" class="submit-btn" onclick="calculateScore()" style="background: #28a745;">採点する</button>
+                </div>
+
+                <div id="result" class="result">
+                    <h2 id="resultTitle"></h2>
+                    <div class="score" id="score"></div>
+                    <div id="resultMessage"></div>
+                </div>
+            </form>
+        </div>
+
+        <!-- 教育用資料 -->
+        <div id="training" class="tab-content">
+            <div class="section">
+                <h2>Ⅰ. 核心概念</h2>
+                <div class="highlight">
+                    <h3>エスピクトスクールとは</h3>
+                    <p class="key-point">「工賃原資を作る装置」＋「加算を取りに行く運用装置」</p>
+                    <ul>
+                        <li>生産活動の収益は <strong>利用者に工賃として支払う</strong></li>
+                        <li>ITスキル教育システム + 実際の案件の提供</li>
+                        <li>目標工賃達成指導員配置と加算取得を支援</li>
+                    </ul>
+                </div>
+                <div class="info">
+                    <h3>エスピクトスクールの正体</h3>
+                    <p class="key-point">「事業所運営のOSを外付けするスクール」</p>
+                </div>
+
+                <h3>❌ これは何ではないか</h3>
+                <ul>
+                    <li>❌ 「仕事を振るサービス」ではない</li>
+                    <li>❌ 「外注を回すサービス」でもない</li>
+                    <li>❌ 「工賃で儲けるサービス」ではない</li>
+                    <li>❌ 「指導員をタダで置けるサービス」ではない</li>
+                </ul>
+
+                <h3>⭕ これは何か</h3>
+                <div class="success">
+                    <p><strong>スクール料金の中で、</strong></p>
+                    <p>教育 + 実務演習（制作課題）+ 運用支援を一体提供する</p>
+                    <p><strong>"運営構造そのもの"を外付けするサービス</strong></p>
+                </div>
+
+                <h3>OSの中身</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>教育OS</h4>
+                        <p>ITカリキュラム・授業・教材</p>
+                    </div>
+                    <div class="card">
+                        <h4>実務OS</h4>
+                        <p>制作課題（実務演習）の提供</p>
+                    </div>
+                    <div class="card">
+                        <h4>在宅OS</h4>
+                        <p>Discord・オンライン完結環境</p>
+                    </div>
+                    <div class="card">
+                        <h4>運営OS</h4>
+                        <p>AI記録・支援計画・業務効率化</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Ⅱ. 5つの核心メリット</h2>
+                
+                <h3>① 工賃を生む</h3>
+                <div class="success">
+                    <h4>実務案件が含まれるプラン設計</h4>
+                    <ul>
+                        <li><strong>エントリープラン（30万円）</strong>: 年間10万円分の実務案件</li>
+                        <li><strong>スタンダードプラン（50万円）</strong>: 年間30万円分の実務案件</li>
+                        <li><strong>プレミアムプラン（100万円）</strong>: 年間60万円分の実務案件</li>
+                    </ul>
+                    <h4>効果</h4>
+                    <ul>
+                        <li>毎月一定量の生産活動を供給</li>
+                        <li>工賃が安定 → 利用者定着</li>
+                        <li>工賃向上計画が実務と連動</li>
+                    </ul>
+                    <p class="key-point">👉 「工賃を"頑張る"から"回る"に変える」</p>
+                </div>
+
+                <h3>② 指導員を活かす</h3>
+                <div class="success">
+                    <h4>目標工賃達成指導員配置を「形だけ」で終わらせない</h4>
+                    <ul>
+                        <li>計画→案件→実績→評価が一本で回る</li>
+                        <li>指導員が実際に機能する環境を提供</li>
+                        <li><strong>不足分（0.2〜0.4）だけの補填で成立する可能性が高い</strong></li>
+                    </ul>
+                    <h4>効果</h4>
+                    <ul>
+                        <li>指導員配置を「名ばかり」にしない</li>
+                        <li>加算を"取りにいく"から"取り続ける"へ</li>
+                    </ul>
+                    <p class="key-point">👉 「人を置くためのサービスではなく、置いた人が機能する環境を作るサービス」</p>
+                </div>
+
+                <h3>③ 加算を安定させる</h3>
+                <div class="success">
+                    <h4>説明可能な工賃原資の提供</h4>
+                    <ul>
+                        <li>第三者取引で<strong>説明可能な工賃原資</strong>に寄せられる</li>
+                        <li>実務案件の実績データが残る</li>
+                        <li>監査・実地指導に備えられる</li>
+                    </ul>
+                    <h4>効果</h4>
+                    <ul>
+                        <li>加算取得の根拠が明確</li>
+                        <li>将来改定・実地指導リスクの軽減</li>
+                        <li>継続的な加算取得が可能</li>
+                    </ul>
+                </div>
+
+                <h3>④ 属人化を外す</h3>
+                <div class="success">
+                    <h4>生産活動・教育・案件供給を仕組み化</h4>
+                    <ul>
+                        <li>システム化されたトレーニングコンテンツ</li>
+                        <li>標準化された実務案件の提供</li>
+                        <li>運用マニュアルとサポート体制</li>
+                    </ul>
+                    <h4>効果</h4>
+                    <ul>
+                        <li>特定職員・管理者への依存を削減</li>
+                        <li>職員疲弊・離職リスクの軽減</li>
+                    </ul>
+                    <p class="key-point">👉 今の安定を"再現可能な形"に変える</p>
+                </div>
+
+                <h3>⑤ 監査・将来改定に備える</h3>
+                <div class="success">
+                    <h4>データに基づく説明力</h4>
+                    <ul>
+                        <li>スキル習得データの蓄積</li>
+                        <li>実務案件の実績データ</li>
+                        <li>工賃向上計画との連動</li>
+                    </ul>
+                    <h4>効果</h4>
+                    <ul>
+                        <li>原資説明が明確</li>
+                        <li>実地指導での説明力</li>
+                        <li>将来改定への対応力</li>
+                    </ul>
+                </div>
+
+                <div class="highlight">
+                    <h3>最終まとめ（これが本質）</h3>
+                    <p class="quote">
+                        エスピクトスクールは、<br>
+                        • 工賃を生む（年間10万円〜60万円分の実務案件）<br>
+                        • 指導員を活かす（計画→案件→実績→評価が一本で回る）<br>
+                        • 加算を安定させる（説明可能な工賃原資）<br>
+                        • 属人化を外す（仕組み化された運用）<br>
+                        • 監査・将来改定に備える（データに基づく説明力）<br><br>
+                        <strong>＝「事業所経営を"人頼み"から"仕組み"に変える装置」</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Ⅲ. 導入メリット完全リスト</h2>
+                <h3>A. 経営・売上・稼働系</h3>
+                <ul>
+                    <li>✅ 利用者数の増加（IT×実務×在宅対応の訴求）</li>
+                    <li>✅ 利用者の定着率向上（学び＋成果物＋達成体験）</li>
+                    <li>✅ 在宅支援による稼働率安定（通所困難層の取り込み）</li>
+                    <li>✅ 給付費の安定化・増加（利用者数増・利用日数増）</li>
+                    <li>✅ 月次売上のブレが減る（在宅も含めて稼働が安定）</li>
+                    <li>✅ 見学→契約率の向上（5領域で適性に合わせて提案）</li>
+                    <li>✅ 相談支援・家族への説明がしやすい（IT教育×在宅×成果物）</li>
+                </ul>
+
+                <h3>B. 生産活動・工賃系</h3>
+                <ul>
+                    <li>✅ 生産活動のネタ切れ防止（実務課題が毎月入る）</li>
+                    <li>✅ 工賃原資を安定的に作れる</li>
+                    <li>✅ 工賃水準の底上げ</li>
+                    <li>✅ 品質が安定しやすい</li>
+                    <li>✅ 職員が仕事探しをしなくてよい</li>
+                </ul>
+
+                <h3>C. 人材・職員体制系</h3>
+                <ul>
+                    <li>✅ IT人材を雇わなくていい</li>
+                    <li>✅ 採用・教育コスト削減</li>
+                    <li>✅ 教材作成が不要</li>
+                    <li>✅ 属人化を防げる</li>
+                    <li>✅ 職員の疲弊軽減</li>
+                </ul>
+
+                <h3>D. 業務効率化・事務系</h3>
+                <ul>
+                    <li>✅ 個別支援計画作成時間70%削減</li>
+                    <li>✅ 記録品質の均一化</li>
+                    <li>✅ 新人職員でも回せる</li>
+                    <li>✅ 記録漏れ・書き直し減少</li>
+                    <li>✅ 残業削減</li>
+                </ul>
+
+                <h3>E. マーケ・差別化系</h3>
+                <ul>
+                    <li>✅ B型市場での明確な差別化（B型でPC関連に取り組む事業所は7.5%）</li>
+                    <li>✅ IT対応事業所としてのブランド確立</li>
+                    <li>✅ 在宅ニーズへの対応</li>
+                    <li>✅ 地域内で選ばれやすくなる</li>
+                    <li>✅ 行政・関係機関からの評価向上</li>
+                </ul>
+
+                <h3>F. 利用者変化（間接的メリット）</h3>
+                <ul>
+                    <li>✅ スキルの可視化（制作物が残るので支援計画・就労支援が具体化）</li>
+                    <li>✅ 就労準備性の向上（納期、指示理解、報連相、チーム制作など）</li>
+                    <li>✅ 社会性・報連相能力向上（在宅支援でも必須のチャットコミュ力が育つ）</li>
+                    <li>✅ 自己肯定感の向上（成果物が"使われる"体験ができる）</li>
+                    <li>✅ 利用者離脱の減少（達成感が継続利用・安定稼働に繋がる）</li>
+                </ul>
+
+                <h3>G. 導入・運用面</h3>
+                <ul>
+                    <li>✅ 最短1週間導入（5ステップが明確）</li>
+                    <li>✅ 無料サポート範囲が広い（機材導入・運用・学習支援まで一気通貫）</li>
+                    <li>✅ トラブル時の相談先が明確</li>
+                    <li>✅ 継続改善ができる</li>
+                </ul>
+
+                <h3>H. 上位プラン・拡張性</h3>
+                <ul>
+                    <li>✅ 複数ライン運用が可能（役割分担で回しやすい）</li>
+                    <li>✅ 拠点拡大時も再現性が高い（運用が仕組み化されていれば再現しやすい）</li>
+                    <li>✅ 利用者役割分担がしやすい（動画班／デザイン班／SNS班…）</li>
+                </ul>
+
+                <h3>I. オプション活用</h3>
+                <ul>
+                    <li>✅ eスポーツでチーム活動強化</li>
+                    <li>✅ VTuber等で発信力UP</li>
+                    <li>✅ イベント連携で地域接点増加</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Ⅳ. 事業所タイプ別メリット</h2>
+                
+                <h3>① 利用者数に困っていない × 生産活動にも困っていない事業所</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>表の顔</h4>
+                        <ul>
+                            <li>定員稼働</li>
+                            <li>工賃も出ている</li>
+                            <li>生産活動も安定</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>裏のリスク</h4>
+                        <ul>
+                            <li>属人化（特定職員・管理者依存）</li>
+                            <li>原資説明が弱い／慣習運用</li>
+                            <li>将来改定・実地指導リスク</li>
+                            <li>職員疲弊・離職リスク</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info">
+                    <h4>エスピクトの価値</h4>
+                    <ul>
+                        <li>生産活動・教育・案件供給を<strong>仕組み化</strong></li>
+                        <li>第三者取引で<strong>説明可能な工賃原資</strong>に寄せられる</li>
+                        <li>目標工賃達成指導員が「名ばかり」にならない</li>
+                        <li><strong>今の安定を"再現可能な形"に変える</strong></li>
+                    </ul>
+                    <p class="quote">👉 「今うまくいっている状態を、将来も続けるための保険」</p>
+                </div>
+
+                <h3>② 利用者数は安定 × 生産活動が不安定な事業所</h3>
+                <div class="warning">
+                    <h4>課題</h4>
+                    <ul>
+                        <li>仕事が途切れる</li>
+                        <li>工賃が上下する</li>
+                        <li>職員が仕事探しに追われる</li>
+                    </ul>
+                </div>
+                <div class="info">
+                    <h4>エスピクトの価値</h4>
+                    <ul>
+                        <li>毎月一定量の生産活動を供給（年間10万円〜60万円分）</li>
+                        <li>工賃が安定 → 利用者定着</li>
+                        <li>工賃向上計画が実務と連動</li>
+                    </ul>
+                    <p class="quote">👉 「工賃を"頑張る"から"回る"に変える」</p>
+                </div>
+
+                <h3>③ 利用者数が不安定 × 生産活動はある事業所</h3>
+                <div class="warning">
+                    <h4>課題</h4>
+                    <ul>
+                        <li>差別化が弱い</li>
+                        <li>新規・紹介に刺さらない</li>
+                    </ul>
+                </div>
+                <div class="info">
+                    <h4>エスピクトの価値</h4>
+                    <ul>
+                        <li>IT×実務×生産活動という明確な売り</li>
+                        <li>在宅支援・若年層対応</li>
+                        <li>見学時の説明が強くなる</li>
+                    </ul>
+                    <p class="quote">👉 「選ばれる理由を一気に作れる」</p>
+                </div>
+
+                <h3>④ 利用者数も生産活動も不安定な事業所</h3>
+                <div class="warning">
+                    <h4>課題</h4>
+                    <ul>
+                        <li>工賃が出ない</li>
+                        <li>職員が疲弊</li>
+                        <li>将来不安が強い</li>
+                    </ul>
+                </div>
+                <div class="info">
+                    <h4>エスピクトの価値</h4>
+                    <ul>
+                        <li>生産活動の土台を外付け（年間10万円〜60万円分）</li>
+                        <li>職員教育・業務負担を軽減</li>
+                        <li>立て直しの"最短ルート"</li>
+                    </ul>
+                    <p class="quote">👉 「ゼロから作らず、外付けで立て直す」</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Ⅴ. 構造と思想</h2>
+                <h3>「タダで指導員を置ける」と言われる構造の正体</h3>
+                <div class="info">
+                    <h4>何が起きているか（事実）</h4>
+                    <ol>
+                        <li>エスピクト導入により生産活動が安定する</li>
+                        <li>工賃が説明できる形で発生する</li>
+                        <li>利用者の稼働が安定する</li>
+                        <li>その結果、目標工賃達成指導員の配置要件を満たしやすくなる</li>
+                        <li>加算が新たに発生する</li>
+                    </ol>
+                </div>
+
+                <div class="warning">
+                    <h4>なぜ「人を置くのにお金がかからない」と感じるのか</h4>
+                    <p>実際には：</p>
+                    <ul>
+                        <li>新たに人件費を"生む"のではなく</li>
+                        <li>既存職員の配置替え or 不足分のみ補填で済むケースが多い</li>
+                        <li>さらに、加算で得られる給付費 ≒ 指導員配置コスト</li>
+                    </ul>
+                    <p class="key-point">👉 体感として「スクール入れたら指導員分が出た」になる</p>
+                </div>
+
+                <div class="highlight">
+                    <h4>正確な内部表現（外向きでは使わない）</h4>
+                    <p>エスピクトは、加算が取りやすい"状態"を作る装置であって、<br>
+                    人件費を直接払っているわけではない</p>
+                </div>
+
+                <h3>よくある誤解と内部での正解</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>誤解</th>
+                            <th>内部での正解</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>スクールで儲かる</td>
+                            <td>儲かるのは運営が安定すること</td>
+                        </tr>
+                        <tr>
+                            <td>工賃が利益になる</td>
+                            <td>工賃は利用者のもの</td>
+                        </tr>
+                        <tr>
+                            <td>指導員がタダ</td>
+                            <td>加算で相殺されやすい</td>
+                        </tr>
+                        <tr>
+                            <td>外注サービス</td>
+                            <td>教育＋実務演習</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>Ⅴ. 料金プラン設計</h2>
+                <h3>プラン設計の思想</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>プラン</th>
+                            <th>本質</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>30万</strong></td>
+                            <td>IT教育を"試験導入"するための最低ライン</td>
+                        </tr>
+                        <tr>
+                            <td><strong>50万</strong></td>
+                            <td>事業所の運営モデルに組み込む標準構成</td>
+                        </tr>
+                        <tr>
+                            <td><strong>100万</strong></td>
+                            <td>事業所を"制作拠点化"するための構成</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>料金比較表</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>プラン</th>
+                            <th>年間料金</th>
+                            <th>仕事依頼額<br>（工賃原資）</th>
+                            <th>カリキュラム</th>
+                            <th>品質チェック</th>
+                            <th>運用レビュー</th>
+                            <th>納品ライン</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>エントリー</strong></td>
+                            <td>30万円</td>
+                            <td>10万円/年</td>
+                            <td>ライト<br>（基礎＋最低限実務）</td>
+                            <td>月1回</td>
+                            <td>月1回（30分）</td>
+                            <td>1ライン</td>
+                        </tr>
+                        <tr>
+                            <td><strong>スタンダード</strong></td>
+                            <td>50万円</td>
+                            <td>30万円/年</td>
+                            <td>フル<br>（基礎〜専門）</td>
+                            <td>月2回</td>
+                            <td>月2回（60分）</td>
+                            <td>1ライン</td>
+                        </tr>
+                        <tr>
+                            <td><strong>プレミアム</strong></td>
+                            <td>100万円</td>
+                            <td>60万円/年</td>
+                            <td>フル<br>（50万と同じ）</td>
+                            <td>月4回（2倍）</td>
+                            <td>月4回（90分、2倍）</td>
+                            <td>2ライン<br>（複数チーム可）</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>エントリープラン（30万円）詳細</h3>
+                <div class="card">
+                    <h4>導入しやすい入口</h4>
+                    <p><strong>年間料金:</strong> 30万円<br>
+                    <strong>仕事依頼額:</strong> 10万円/年</p>
+                    <p>「30万で10万の実務課題」だと数字の納得感が上がる</p>
+                    <h4>含まれる内容</h4>
+                    <ul>
+                        <li>基礎コース3コース（タイピング、データ入力、ビジネスマナー）</li>
+                        <li>実務案件：年間10万円分（簡単なデータ入力・短時間文字起こし）</li>
+                        <li>月1回の品質チェック・運用レビュー</li>
+                        <li>基本マニュアル提供</li>
+                    </ul>
+                    <h4>こんな事業所におすすめ</h4>
+                    <ul>
+                        <li>初めてIT教育を導入する事業所</li>
+                        <li>小規模事業所（利用者10名程度）</li>
+                        <li>まずは試してみたい事業所</li>
+                    </ul>
+                </div>
+
+                <h3>スタンダードプラン（50万円）詳細</h3>
+                <div class="card">
+                    <h4>実務に直結する、本格的なスキル習得</h4>
+                    <p><strong>年間料金:</strong> 50万円<br>
+                    <strong>仕事依頼額:</strong> 30万円/年</p>
+                    <h4>含まれる内容</h4>
+                    <ul>
+                        <li>全コースアクセス（基礎3＋応用5＋専門7コース）</li>
+                        <li>実務案件：年間30万円分（多様な案件・中級レベル）</li>
+                        <li>月2回の品質チェック・運用レビュー（60分）</li>
+                        <li>詳細マニュアル + カスタムマニュアル</li>
+                    </ul>
+                    <h4>30万円プランとの違い</h4>
+                    <ul>
+                        <li>学べる範囲と実務の深さが変わる</li>
+                        <li>添削・検品の頻度が2倍</li>
+                        <li>運用設計のサポートが手厚い</li>
+                    </ul>
+                    <h4>こんな事業所におすすめ</h4>
+                    <ul>
+                        <li>本格的にITスキル教育を導入したい事業所</li>
+                        <li>中規模事業所（利用者30名程度）</li>
+                        <li>工賃向上を目指す事業所</li>
+                    </ul>
+                </div>
+
+                <h3>プレミアムプラン（100万円）詳細</h3>
+                <div class="card">
+                    <h4>大規模運用・複数チーム対応</h4>
+                    <p><strong>年間料金:</strong> 100万円<br>
+                    <strong>仕事依頼額:</strong> 60万円/年（スタンダードの2倍）</p>
+                    <h4>含まれる内容</h4>
+                    <ul>
+                        <li>全コースアクセス（スタンダードと同じ）</li>
+                        <li>実務案件：年間60万円分（スタンダードの2倍）</li>
+                        <li>月4回の品質チェック・運用レビュー（90分、2倍）</li>
+                        <li>2ライン運用対応（複数チーム運用可）</li>
+                        <li>担当者向けの運用研修（職員側）付き</li>
+                    </ul>
+                    <h4>50万円プランとの違い</h4>
+                    <ul>
+                        <li>カリキュラム内容は同じ</li>
+                        <li>実務案件の量が2倍</li>
+                        <li>運用密度が2倍（品質チェック・レビュー）</li>
+                        <li>複数チーム運用が可能</li>
+                    </ul>
+                    <h4>「50万×2」ではなく、1つのプランとして運用するメリット</h4>
+                    <ul>
+                        <li>統一された品質管理</li>
+                        <li>効率的な運用（1つのプランで複数チーム管理）</li>
+                        <li>専任サポートによる手厚い支援</li>
+                    </ul>
+                    <h4>こんな事業所におすすめ</h4>
+                    <ul>
+                        <li>大規模事業所（利用者50名以上）</li>
+                        <li>複数チームで運用したい事業所</li>
+                        <li>本格的な工賃向上を目指す事業所</li>
+                        <li>高い品質管理を求める事業所</li>
+                    </ul>
+                </div>
+
+                <h3>プラン選定ガイド</h3>
+                <div class="info">
+                    <h4>初導入・小規模事業所</h4>
+                    <p>→ <strong>エントリープラン（30万円）</strong></p>
+                    <ul>
+                        <li>年間10万円分の実務案件</li>
+                        <li>基礎コース中心</li>
+                    </ul>
+
+                    <h4>本格導入・中規模事業所</h4>
+                    <p>→ <strong>スタンダードプラン（50万円）</strong></p>
+                    <ul>
+                        <li>年間30万円分の実務案件</li>
+                        <li>全コースアクセス</li>
+                    </ul>
+
+                    <h4>大規模運用・複数チーム運用</h4>
+                    <p>→ <strong>プレミアムプラン（100万円）</strong></p>
+                    <ul>
+                        <li>年間60万円分の実務案件</li>
+                        <li>運用密度2倍、複数チーム対応</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Ⅵ. 営業トーク・台本</h2>
+                <h3>一言要約テンプレ</h3>
+                <div class="grid">
+                    <div class="card">
+                        <p class="quote">「教育・実務・生産活動・運営をまとめて外付けするサービスです」</p>
+                    </div>
+                    <div class="card">
+                        <p class="quote">「人を増やさず、できることを増やすためのスクールです」</p>
+                    </div>
+                    <div class="card">
+                        <p class="quote">「困ってから入れるサービスじゃなく、困らないための仕組みです」</p>
+                    </div>
+                </div>
+
+                <h3>30秒説明</h3>
+                <div class="highlight">
+                    <p>エスピクトスクールは、<br>
+                    IT教育と実際の案件を提供し、<br>
+                    利用者さんが実践的にスキルを身につけられるサービスです。<br>
+                    教材作りや講師採用をせずに、<br>
+                    IT時代の需要に対応できる体制を整えることができます。</p>
+                </div>
+
+                <h3>事業所タイプ別トーク</h3>
+                <h4>①「今困ってない」事業所</h4>
+                <div class="info">
+                    <p><strong>キーワード:</strong> 属人化、将来耐性、壊れない体制</p>
+                    <p class="quote">今困っていない事業所ほど、人が抜けた瞬間に崩れやすいです。<br>
+                    エスピクトは、困らない状態を先に作る選択です。</p>
+                </div>
+
+                <h4>② 生産活動に困っている事業所</h4>
+                <div class="info">
+                    <p><strong>キーワード:</strong> IT案件、実践的スキル、需要対応</p>
+                    <p class="quote">IT時代の需要に対応できる実案件を提供するサービスです。</p>
+                </div>
+
+                <h4>③ 利用者が集まらない事業所</h4>
+                <div class="info">
+                    <p><strong>キーワード:</strong> IT対応、在宅支援、時代に合う</p>
+                    <p class="quote">IT時代に対応できる事業所として選ばれる理由を作ります。</p>
+                </div>
+
+                <h4>④ 現場が疲弊している事業所</h4>
+                <div class="info">
+                    <p><strong>キーワード:</strong> 外付け、負担軽減、効率化</p>
+                    <p class="quote">IT教育・案件提供を外付けすることで、職員の負担を減らします。</p>
+                </div>
+
+                <h3>よくある質問への回答</h3>
+                <h4>Q: 「高くない？」</h4>
+                <div class="card">
+                    <p><strong>正解返答:</strong></p>
+                    <p class="quote">スクール費用というより、<br>
+                    教材・人材・仕事探し・記録業務を<br>
+                    まとめて置き換えた金額です。</p>
+                </div>
+
+                <h4>Q: 「入れるだけでタダ？」</h4>
+                <div class="card">
+                    <p><strong>営業で一番安全で強い一文:</strong></p>
+                    <p class="quote">入れるだけでタダ、ではありません。<br>
+                    ただし多くの事業所で、<br>
+                    不足分だけの補填で指導員配置と加算取得を成立させられます。<br>
+                    さらに、年間10万円〜60万円分の実案件が含まれるため、<br>
+                    工賃原資としても機能します。</p>
+                </div>
+
+                <h3>営業で一番安全で強い一文</h3>
+                <div class="highlight">
+                    <p class="quote">
+                        入れるだけでタダ、ではありません。<br>
+                        ただし多くの事業所で、<br>
+                        不足分だけの補填で指導員配置と加算取得を成立させられます。<br>
+                        さらに、年間10万円〜60万円分の実案件が含まれるため、<br>
+                        工賃原資としても機能します。
+                    </p>
+                </div>
+
+                <h3>プラン説明のポイント</h3>
+                <div class="info">
+                    <h4>30万→50万の説明</h4>
+                    <p class="quote">「学べる範囲と実務の深さが変わります」</p>
+                    
+                    <h4>50万→100万の説明</h4>
+                    <p class="quote">「カリキュラムは同じ。量と運用密度が上がります（2ライン運用できます）」</p>
+                </div>
+
+                <h3>クロージング用</h3>
+                <div class="success">
+                    <p class="quote">これからIT時代が来ます。<br>
+                    その需要に対応できる体制を今から整えておくことが、<br>
+                    事業所の将来を守ることにつながります。<br>
+                    エスピクトは、IT時代の需要に対応するための選択肢です。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Ⅶ. 新人研修台本</h2>
+                <div class="warning">
+                    <h3>🎯 ゴール</h3>
+                    <p>❌ 商品説明ができる<br>
+                    ⭕ 思想・構造・NGを理解した上で、安全に提案できる</p>
+                    <p><strong>想定時間:</strong> 90〜120分（座学60分 + ロープレ30〜60分）</p>
+                </div>
+
+                <h3>第1章｜最初に必ず叩き込む前提（10分）</h3>
+                <div class="warning">
+                    <h4>【講師トーク】</h4>
+                    <p>まず大事なことを言います。</p>
+                    <p>エスピクトスクールは「売れればいいサービス」ではありません。</p>
+                    <p>理解してない人が入れると、<br>
+                    • 現場が誤解する<br>
+                    • 行政説明で詰まる<br>
+                    • トラブルになります。</p>
+                </div>
+
+                <div class="highlight">
+                    <h4>【新人に覚えさせる一文】</h4>
+                    <p class="key-point">👉 「選ばれるより、選ぶサービス」</p>
+                </div>
+
+                <div class="warning">
+                    <h4>❗絶対NGワード（ここで強調）</h4>
+                    <p>新人は以下を言ってはいけない。</p>
+                    <ul>
+                        <li>❌ 外注サービス</li>
+                        <li>❌ 仕事を振る</li>
+                        <li>❌ 仕事をバックする</li>
+                        <li>❌ 工賃で儲かる</li>
+                        <li>❌ 指導員がタダ</li>
+                        <li>❌ これ入れたら利益出ます</li>
+                    </ul>
+                    <p><strong>→ これ言った時点で失格。</strong></p>
+                </div>
+
+                <h3>第2章｜エスピクトスクールの正体（15分）</h3>
+                <div class="info">
+                    <h4>【暗記フレーズ】</h4>
+                    <p class="key-point">👉 「事業所運営のOSを外付けするスクール」</p>
+                </div>
+
+                <h4>新人チェック質問</h4>
+                <div class="card">
+                    <p><strong>Q. エスピクトは「仕事を出すサービス」ですか？</strong></p>
+                    <p><strong>A. ❌ いいえ</strong><br>
+                    👉 IT教育と実際の案件を提供し、利用者さんが実践的にスキルを身につけられるスクール</p>
+                </div>
+
+                <h3>第3章｜料金プランの売り分け方（20分）</h3>
+                <div class="info">
+                    <h4>プラン選定の視点</h4>
+                    <p class="key-point">これから来るIT時代、需要に対策ができているか</p>
+                </div>
+                <div class="grid">
+                    <div class="card">
+                        <h4>30万プラン</h4>
+                        <p class="quote">👉 IT教育を始めるための最低ライン</p>
+                        <p><strong>使う言葉:</strong></p>
+                        <ul>
+                            <li>まずIT教育を導入したい</li>
+                            <li>小規模から始めたい</li>
+                            <li>IT時代への準備を始める</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>50万プラン（主軸）</h4>
+                        <p class="quote">👉 IT時代に対応できる標準形</p>
+                        <p><strong>使う言葉:</strong></p>
+                        <ul>
+                            <li>IT需要に対応できる体制</li>
+                            <li>在宅支援も含めた本格運用</li>
+                            <li>将来のIT需要に備える</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>100万プラン（上級）</h4>
+                        <p class="quote">👉 IT時代の需要に完全対応</p>
+                        <p><strong>使う言葉:</strong></p>
+                        <ul>
+                            <li>複数チームでIT案件対応</li>
+                            <li>大規模なIT需要に対応</li>
+                            <li>IT時代の拠点化</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h4>❗新人NG</h4>
+                    <ul>
+                        <li>❌ 「仕事が増えます」</li>
+                        <li>❌ 「工賃で回収できます」</li>
+                    </ul>
+                </div>
+
+                <h3>第4章｜事業所タイプ別トーク（20分）</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>①「今困ってない」事業所</h4>
+                        <p>今困っていない事業所ほど、<br>
+                        人が抜けた瞬間に崩れやすいです。</p>
+                        <p><strong>キーワード:</strong> 属人化、将来耐性、壊れない体制</p>
+                    </div>
+                    <div class="card">
+                        <h4>② 生産活動に困っている</h4>
+                        <p>IT時代の需要に対応できる<br>
+                        実案件を提供するサービスです。</p>
+                        <p><strong>キーワード:</strong> IT案件、実践的スキル、需要対応</p>
+                    </div>
+                    <div class="card">
+                        <h4>③ 利用者が集まらない</h4>
+                        <p>IT時代に対応できる事業所として<br>
+                        選ばれる理由を作ります。</p>
+                        <p><strong>キーワード:</strong> IT対応、在宅支援、時代に合う</p>
+                    </div>
+                    <div class="card">
+                        <h4>④ 現場が疲弊</h4>
+                        <p>IT教育・案件提供を外付けすることで、<br>
+                        職員の負担を減らします。</p>
+                        <p><strong>キーワード:</strong> 外付け、負担軽減、効率化</p>
+                    </div>
+                </div>
+
+                <h3>第5章｜ロープレ台本（30分）</h3>
+                <h4>ロープレ① 初回説明（60秒）</h4>
+                <div class="card">
+                    <p><strong>営業役:</strong></p>
+                    <p>エスピクトスクールは<br>
+                    IT教育と実際の案件を提供し、<br>
+                    利用者さんが実践的にスキルを身につけられるサービスです。</p>
+                </div>
+
+                <h4>ロープレ② 高いと言われた時</h4>
+                <div class="card">
+                    <p><strong>相手:</strong> 「高くない？」</p>
+                    <p><strong>正解返答:</strong></p>
+                    <p>スクール費用というより、<br>
+                    教材・人材・実案件提供・記録業務を<br>
+                    まとめて置き換えた金額です。<br>
+                    IT時代の需要に対応するための投資と考えていただけます。</p>
+                </div>
+
+                <h3>第6章｜最後に新人へ伝える一言（5分）</h3>
+                <div class="success">
+                    <h4>【締めトーク】</h4>
+                    <p>エスピクトは売るサービスではありません。</p>
+                    <p>理解してもらってから入れてもらうサービスです。</p>
+                    <p class="key-point">無理に売らない人ほど、長く結果を出します。</p>
+                </div>
+
+                <h3>🧠 新人が最低限覚える暗記セット（持ち帰り）</h3>
+                <div class="highlight">
+                    <ul>
+                        <li>エスピクト＝事業所運営OS</li>
+                        <li>利用者さんが実践的にスキルを身につけられるサービス</li>
+                        <li>IT時代の需要に対応するためのサービス</li>
+                        <li>選ばれるより、選ぶ</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Ⅷ. 監査・行政説明耐性</h2>
+                <h3>生産活動として説明できる理由</h3>
+                <div class="success">
+                    <ul>
+                        <li>✅ 成果物が存在する（動画・画像・Web等）</li>
+                        <li>✅ 作業工程が明確（指示書・授業・制作フロー）</li>
+                        <li>✅ 工賃が成果に基づき利用者へ支払われる</li>
+                        <li>✅ 事業所職員の管理下で実施されている</li>
+                    </ul>
+                    <p class="key-point">👉 「教育的に構造化された生産活動」</p>
+                </div>
+
+                <h3>NGになりやすい誤解（内部注意）</h3>
+                <div class="warning">
+                    <h4>❌ 言ってはいけない表現</h4>
+                    <ul>
+                        <li>❌ 「外注を丸投げしている」</li>
+                        <li>❌ 「スクールが直接指示している」</li>
+                        <li>❌ 「工賃原資＝スクールへの支払い」</li>
+                    </ul>
+                </div>
+
+                <div class="success">
+                    <h4>⭕ 正解は</h4>
+                    <ul>
+                        <li>スクール：教育・教材・制作課題・支援環境の提供</li>
+                        <li>事業所：利用者支援・作業管理・工賃支払い主体</li>
+                    </ul>
+                </div>
+
+                <h3>行政向け一文テンプレ（内部用）</h3>
+                <div class="info">
+                    <p class="quote">
+                        当事業所では、<br>
+                        外部スクールが提供する教育プログラムと制作課題を活用し、<br>
+                        事業所職員の管理下で、生産活動として取り組んでいます。<br>
+                        成果物に基づき、適正に工賃を支払っています。
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Ⅸ. 競合防御設計</h2>
+                <div class="highlight">
+                    <h3>結論から</h3>
+                    <p class="key-point">真似しようとしても、ほぼ100%どこかで詰まる。</p>
+                    <p>理由は「技術」ではなく、<br>
+                    👉 構造が"多層依存"になっているから</p>
+                </div>
+
+                <h3>真似できない理由①</h3>
+                <h4>「教育 × 実務 × 運用 × 福祉制度」の同時成立</h4>
+                <p>多くの事業者はどれか一つしかできない。</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>よくあるパターン</th>
+                            <th>限界</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>教育だけ</td>
+                            <td>工賃・生産活動に繋がらない</td>
+                        </tr>
+                        <tr>
+                            <td>仕事だけ</td>
+                            <td>教育にならず疲弊</td>
+                        </tr>
+                        <tr>
+                            <td>ITだけ</td>
+                            <td>福祉制度説明が弱い</td>
+                        </tr>
+                        <tr>
+                            <td>福祉だけ</td>
+                            <td>品質・再現性がない</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="info">
+                    <p>エスピクトは4つが同時に成立する設計になっている。<br>
+                    👉 どれか一つ欠けると、同じ体験価値にならない。</p>
+                </div>
+
+                <h3>真似できない理由②</h3>
+                <h4>「教材」ではなく「運用知」が中核</h4>
+                <div class="card">
+                    <p>教材は真似できる<br>
+                    画面も真似できる<br>
+                    料金表も真似できる</p>
+                    <p><strong>でも、</strong></p>
+                    <ul>
+                        <li>どこで詰まるか</li>
+                        <li>どこで離脱するか</li>
+                        <li>どう並走すると回るか</li>
+                    </ul>
+                    <p class="key-point">👉 ここは"運用経験の塊"</p>
+                    <p>後追いは最短でも1〜2年の失敗コストが必要</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Ⅹ. 最終まとめ</h2>
+                <div class="success">
+                    <h3>エスピクトスクールの正体</h3>
+                    <p class="key-point">「スクール」ではなく「事業所運営のOS」</p>
+                    <ul>
+                        <li>教育OS</li>
+                        <li>実務OS</li>
+                        <li>在宅OS</li>
+                        <li>記録OS</li>
+                    </ul>
+                    <p>これを外付けしている。</p>
+                </div>
+
+                <div class="info">
+                    <h3>最後に（内部向けメモ）</h3>
+                    <ul>
+                        <li>無理に広げなくていい</li>
+                        <li>深く刺さる事業所だけでいい</li>
+                        <li>理解できる人ほど、長く使う</li>
+                        <li>理解できない人は、入れても事故る</li>
+                    </ul>
+                    <p class="key-point">👉 選ばれるより、選ぶサービス</p>
+                </div>
+
+                <div class="highlight">
+                    <h3>エスピクトスクールの本質</h3>
+                    <p class="quote">
+                        IT時代の需要に対応できる体制を整えるスクール<br><br>
+                        利用者さんが実践的にスキルを身につけられる<br>
+                        職員の負担を減らしながらIT対応ができる<br>
+                        事業所がIT時代の需要に対応できる<br><br>
+                        これらを一度に実現するためのスクール。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // タブ切り替え機能
+        function switchTab(tabName) {
+            // すべてのタブコンテンツを非表示
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // すべてのタブボタンからactiveクラスを削除
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // 選択されたタブを表示
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // テスト用JavaScript
+        const correctAnswers = {
+            q2: 'B',
+            q3: 'C',
+            q7: 'B'
+        };
+
+        const modelAnswers = {
+            q1: '授業費ではなく、事業所運営コストの置き換え',
+            q4: '値下げ交渉 → 設計の話',
+            q5: '実案件を受けても事故らない型づくり',
+            q6: '毎月安定して実案件を回したい',
+            q8: '丸投げではなく、教育前提で指示書・品質管理まで含めて提供',
+            q9: 'どのタイプの"高い"か質問で特定',
+            q10: '比較対象は研修ではなく、講師採用＋実案件運用＋品質管理',
+            q11: '値下げより設計を合わせる',
+            q12: '工賃で回収、指導員がタダ',
+            q13: '選ばれる理由が増える',
+            q14: '無料効果試算',
+            q15: '選ばれるより、選ぶサービス'
+        };
+
+        function showAnswers() {
+            const answers = document.querySelectorAll('.answer');
+            answers.forEach(answer => {
+                answer.classList.add('show');
+            });
+        }
+
+        function calculateScore() {
+            let score = 0;
+            let total = 15;
+
+            // 選択式問題の採点
+            Object.keys(correctAnswers).forEach(q => {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === correctAnswers[q]) {
+                    score++;
+                }
+            });
+
+            // 記述式問題の採点（簡易版）
+            const textQuestions = ['q1', 'q4', 'q5', 'q6', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14', 'q15'];
+            textQuestions.forEach(q => {
+                const answerElement = document.querySelector(`textarea[name="${q}"]`);
+                if (answerElement) {
+                    const answer = answerElement.value.toLowerCase();
+                    const model = modelAnswers[q].toLowerCase();
+                    const keywords = model.split(/[、，・]/).map(k => k.trim()).filter(k => k.length > 2);
+                    const hasKeyword = keywords.some(keyword => answer.includes(keyword));
+                    if (hasKeyword || answer.length > 10) {
+                        score++;
+                    }
+                }
+            });
+
+            // 結果表示
+            const resultDiv = document.getElementById('result');
+            const resultTitle = document.getElementById('resultTitle');
+            const scoreDiv = document.getElementById('score');
+            const resultMessage = document.getElementById('resultMessage');
+
+            if (resultDiv && resultTitle && scoreDiv && resultMessage) {
+                resultDiv.classList.add('show');
+                scoreDiv.textContent = `得点: ${score} / ${total} 問`;
+
+                if (score >= 12) {
+                    resultDiv.classList.add('pass');
+                    resultDiv.classList.remove('fail');
+                    resultTitle.textContent = '✅ 合格！';
+                    resultMessage.innerHTML = `
+                        <p style="font-size: 1.2em; margin: 20px 0;">おめでとうございます！</p>
+                        <p><span class="badge badge-success">商談同席OK</span></p>
+                        <p style="margin-top: 20px;">理解度が十分です。実際の商談に同席して経験を積んでください。</p>
+                    `;
+                } else {
+                    resultDiv.classList.add('fail');
+                    resultDiv.classList.remove('pass');
+                    resultTitle.textContent = '❌ 不合格';
+                    resultMessage.innerHTML = `
+                        <p style="font-size: 1.2em; margin: 20px 0;">再研修が必要です</p>
+                        <p><span class="badge badge-danger">再研修＋ロープレ3本</span></p>
+                        <p style="margin-top: 20px;">解答を確認して、再度学習してください。</p>
+                    `;
+                }
+            }
+
+            showAnswers();
+        }
+    </script>
+</body>
+</html>

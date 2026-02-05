@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エスピクトスクール 営業チートシート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cheatsheet {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            page-break-inside: avoid;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .quote strong {
+            color: #667eea;
+        }
+
+        .warning {
+            background: #f8d7da;
+            padding: 15px;
+            border-left: 4px solid #dc3545;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .success {
+            background: #d4edda;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .info {
+            background: #d1ecf1;
+            padding: 15px;
+            border-left: 4px solid #17a2b8;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #667eea;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        .badge-danger {
+            background: #dc3545;
+        }
+
+        .badge-success {
+            background: #28a745;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid #e9ecef;
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .key-point {
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                padding: 0;
+            }
+            .cheatsheet {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cheatsheet">
+            <div class="header">
+                <h1>エスピクトスクール</h1>
+                <p>営業チートシート【1枚／実案件A前提】</p>
+            </div>
+
+            <div class="section">
+                <h2>🎯 目的</h2>
+                <ul>
+                    <li>✅ 値下げせずに価格を通す</li>
+                    <li>✅ 「回収できます」を使わずに納得させる</li>
+                    <li>✅ 30／50／100万に安全着地させる</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>■ 最初の一言（暗記必須）</h2>
+                <div class="quote">
+                    これは授業費ではなく、<br>
+                    <strong>教育＋実案件（制作業務）＋指示書＋品質管理＋運用支援＋AI記録</strong>まで含めた<br>
+                    <strong>事業所運営コストの置き換え</strong>です。
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ 価格反論の分岐（30秒で判定）</h2>
+                <div class="info">
+                    <h3>質問：</h3>
+                    <p class="key-point">高いと感じるのは<br>
+                    ①固定費として重い<br>
+                    ②価値が見えない<br>
+                    ③他社比較<br>
+                    どれに近いですか？</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ タイプ別・即返答</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>① 固定費が重い</h4>
+                        <p class="quote">
+                            <strong>30万でまず回るか確認</strong>が安全です。<br>
+                            回ったら50万に上げる方が成功率高いです。
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h4>② 価値が見えない</h4>
+                        <p class="quote">
+                            高いかどうかは、<br>
+                            <strong>教材／人材／実案件運用／品質管理／記録</strong><br>
+                            どこが一番しんどいかで決まります。
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h4>③ 他社比較</h4>
+                        <p class="quote">
+                            教育単体と比べると高いです。<br>
+                            比較対象は<br>
+                            <strong>講師採用＋教材＋実案件運用＋品質管理＋記録効率化</strong>です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ 「回収できる？」の正解</h2>
+                <div class="success">
+                    <p>回収は工賃ではなく、<br>
+                    <strong>提供価値が増えて利用者が増え、給付費が増える</strong>ケースが多いです。<br>
+                    IT・在宅・実案件が「選ばれる理由」になります。</p>
+                </div>
+                <div class="info">
+                    <h3>安全な事例表現</h3>
+                    <p class="quote">見学が増えて利用者数が増えた事業所は複数あります。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ プランの意味（これだけ覚える）</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h4><span class="badge">30万</span></h4>
+                        <p class="key-point">型づくり<br>（事故らない導入）</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="badge">50万</span></h4>
+                        <p class="key-point">安定運用<br>（毎月回す）</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="badge">100万</span></h4>
+                        <p class="key-point">拠点化<br>（複数ライン）</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ 値下げ要求の守り</h2>
+                <div class="warning">
+                    <p class="quote">
+                        値下げより<strong>設計合わせ</strong>が正解です。<br>
+                        下げるなら、実案件量／伴走頻度／初期支援のどれかを削ります。
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ NGワード</h2>
+                <div class="warning">
+                    <ul>
+                        <li>❌ 工賃で回収</li>
+                        <li>❌ 外注丸投げ</li>
+                        <li>❌ 指導員がタダ</li>
+                        <li>❌ これで儲かる</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>■ 最後の着地点</h2>
+                <div class="success">
+                    <p class="key-point"><strong>無料効果試算</strong>で数字を見て判断しましょう。</p>
+                </div>
+            </div>
+
+            <div class="section" style="background: #fff3cd; border-left-color: #ffc107;">
+                <h2>💡 使い方</h2>
+                <ul>
+                    <li>商談前に必ず目を通す</li>
+                    <li>価格反論が出たら「30秒判定」を実行</li>
+                    <li>NGワードは絶対に使わない</li>
+                    <li>最後は必ず「無料効果試算」を提案</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

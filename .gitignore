@@ -1,0 +1,27 @@
+.DS_Store
+.vscode/
+
+# Env / secrets
+.env
+.env.*
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+coverage/
+
+# Databases / local state
+*.db
+*.db-journal
+
+# Archives
+*.zip
